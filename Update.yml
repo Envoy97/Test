@@ -1,5 +1,12 @@
-- win_updates:
-    category_names:
-      - SecurityUpdates
-      - CriticalUpdates
-      - UpdateRollups
+- name: Run Updates on App Servers
+  hosts: sb-adk
+  connection: winrm
+
+  tasks:
+    win_updates:
+      category_names:
+        - CriticalUpdates
+        - DefinitionUpdates
+        - SecurityUpdates
+        - Updates
+    reboot: yes

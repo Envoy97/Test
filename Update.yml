@@ -1,5 +1,5 @@
 ---
-- hosts: sb-adk
+- hosts: all
   tasks:
     - name: windows_update
       windows_updates

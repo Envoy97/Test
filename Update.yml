@@ -1,28 +1,11 @@
----
-- name: wait for connection
-  wait_for_connection:
+- name: Install all critical and security updates
+  win_updates:
+    category_names:
+    - CriticalUpdates
+    - SecurityUpdates
+    state: installed
+  register: update_result
 
-- name: ensure winrm service has delayed start
-  ansible.windows.win_service:
-    name: WinRM
-    state: started
-    start_mode: delayed
-
-- block:
-  - name: check for updates windows
-    ansible.windows.win_updates:
-      category_names:
-      - Application
-      - Connectors
-      - CriticalUpdates
-      - DefinitionUpdates
-      - DeveloperKits
-      - Drivers
-      - FeaturePacks
-      - Guidance
-      - SecurityUpdates
-      - ServicePacks
-      - Tools
-      - UpdateRollups
-      - Updates
-      - Upgrades
+- name: Reboot host if required
+  win_reboot:
+  when: update_result.reboot_required

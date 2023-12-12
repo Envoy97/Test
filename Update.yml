@@ -3,7 +3,7 @@
   hosts: sb-adk
   connection: winrm
 
-  tasks:
+  roles:
     win_updates:
       category_names:
         - CriticalUpdates

@@ -1,9 +1,11 @@
 ---
-- name: Install
-  ansible.windows.win_updates:
-    category_names: '*'
-    reboot: true
-- name: Touch
-  ansible.windows.win_file:
-    path: C:\Temp\foo.conf
-    state: touch
+- hosts: sb-adk
+  tasks:
+    - name: windows_update
+      windows_updates
+        reboot_timeout: 1200
+        whitelist: undefined
+        reboot: yes
+        use_scheduled_task: no
+        blacklist: undefined
+        state: searched

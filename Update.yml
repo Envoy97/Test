@@ -1,11 +1,28 @@
 ---
-- hosts: all
-  tasks:
-    - name: windows_update
-      windows_updates
-        reboot_timeout: 1200
-        whitelist: undefined
-        reboot: yes
-        use_scheduled_task: no
-        blacklist: undefined
-        state: searched
+- name: wait for connection
+  wait_for_connection:
+
+- name: ensure winrm service has delayed start
+  ansible.windows.win_service:
+    name: WinRM
+    state: started
+    start_mode: delayed
+
+- block:
+  - name: check for updates windows
+    ansible.windows.win_updates:
+      category_names:
+      - Application
+      - Connectors
+      - CriticalUpdates
+      - DefinitionUpdates
+      - DeveloperKits
+      - Drivers
+      - FeaturePacks
+      - Guidance
+      - SecurityUpdates
+      - ServicePacks
+      - Tools
+      - UpdateRollups
+      - Updates
+      - Upgrades

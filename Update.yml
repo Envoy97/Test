@@ -1,8 +1,5 @@
 ---
--name: Manage windows servers
-hosts: win
-tasks:
--name: Create Directory Structure
-  win_file:
-    path: C:\Temp\folder\subfolder
-  state: directory
+- name: Touch a file (creates if not present, updates modification time if present)
+  ansible.windows.win_file:
+    path: C:\Temp\foo.conf
+    state: touch

@@ -1,3 +1,4 @@
+---
 - name: Run Updates on App Servers
   hosts: sb-adk
   connection: winrm

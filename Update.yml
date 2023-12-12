@@ -1,4 +1,8 @@
 ---
+- name: Install all updates and reboot as many times as needed
+  ansible.windows.win_updates:
+    category_names: '*'
+    reboot: true
 - name: Touch a file (creates if not present, updates modification time if present)
   ansible.windows.win_file:
     path: C:\Temp\foo.conf
